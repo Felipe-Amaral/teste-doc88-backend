@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Product\Service;
 
-use App\Domain\Customer\Resource\CustomerCollection;
+use App\Domain\Product\Resource\ProductCollection;
 
 interface ProductServiceInterface
 {
-    public function getList(): CustomerCollection;
+    public function getList(): ProductCollection;
 }
