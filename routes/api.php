@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('customer', CustomerController::class,
-    [
-        'except' => ['create', 'edit'],
-    ]
-);
+Route::resource('customer', CustomerController::class, ['except' => ['create', 'edit']]);
+Route::resource('product', ProductController::class, ['except' => ['create', 'edit']]);
+Route::resource('order', OrderController::class, ['except' => ['create', 'edit']]);
