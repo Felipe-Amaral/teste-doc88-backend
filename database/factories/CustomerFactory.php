@@ -25,7 +25,6 @@ class CustomerFactory extends Factory
             'adressComplement' => fake()->buildingNumber(),
             'district' => fake()->city(),
             'cep' => fake()->postcode(),
-            'createdAt' => now(),
         ];
     }
 }
