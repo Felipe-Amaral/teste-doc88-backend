@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Customer\Service\CustomerServiceInterface;
+use App\Http\Requests\Customer\CustomerStoreRequest;
+use App\Http\Requests\Customer\CustomerUpdateRequest;
 use Fig\Http\Message\StatusCodeInterface as Code;
 use Illuminate\Http\JsonResponse;
 
@@ -61,7 +63,7 @@ class CustomerController extends Controller
         try {
             return response()->json(
                 [
-                    'data' => $this->service->show($id),
+                    'data' => $this->service->findById($id),
                 ],
                 Code::STATUS_OK
             );
@@ -101,7 +103,7 @@ class CustomerController extends Controller
         try {
             return response()->json(
                 [
-                    'data' => $this->service->destroy($id),
+                    'data' => $this->service->delete($id),
                 ],
                 Code::STATUS_OK
             );

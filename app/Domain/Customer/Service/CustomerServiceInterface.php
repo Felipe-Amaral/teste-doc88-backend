@@ -15,7 +15,7 @@ interface CustomerServiceInterface
 
     public function findById(int $id): CustomerEntity;
 
-    public function create(CustomerStoreRequest $request): bool;
+    public function store(CustomerStoreRequest $request): bool;
 
     public function update(CustomerUpdateRequest $request): bool;
 
