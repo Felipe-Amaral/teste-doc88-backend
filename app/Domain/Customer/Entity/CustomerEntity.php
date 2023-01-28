@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Arrayable;
 
 class CustomerEntity implements Arrayable
 {
+    private ?int $id;
     private ?string $name;
     private ?string $email;
     private ?string $phone;
@@ -17,10 +18,21 @@ class CustomerEntity implements Arrayable
     private ?string $district;
     private ?string $cep;
     private ?string $createdAt;
+    private ?string $updatedAt;
 
     public function __construct(array $data = [])
     {
         $this->populate($data);
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $data): void
+    {
+        $this->id = $data;
     }
 
     public function getName(): string
@@ -113,8 +125,19 @@ class CustomerEntity implements Arrayable
         $this->createdAt = $data;
     }
 
+    public function getUpdatedAt(): string
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(string $data): void
+    {
+        $this->updatedAt = $data;
+    }
+
     private function populate(array $data): void
     {
+        $this->setId($data['id'] ?? null);
         $this->setName($data['name'] ?? null);
         $this->setEmail($data['email'] ?? null);
         $this->setPhone($data['phone'] ?? null);
@@ -123,12 +146,14 @@ class CustomerEntity implements Arrayable
         $this->setAdressComplement($data['adressComplement'] ?? null);
         $this->setDistrict($data['district'] ?? null);
         $this->setCep($data['cep'] ?? null);
-        $this->setCreatedAt($data['createdAt'] ?? null);
+        $this->setCreatedAt($data['created_at'] ?? null);
+        $this->setUpdatedAt($data['updated_at'] ?? null);
     }
 
     public function toArray(): array
     {
         return [
+            'id' => $this->getId(),
             'name' => $this->getName(),
             'email' => $this->getEmail(),
             'phone' => $this->getPhone(),
@@ -137,7 +162,8 @@ class CustomerEntity implements Arrayable
             'adressComplement' => $this->getAdressComplement(),
             'district' => $this->getDistrict(),
             'cep' => $this->getCep(),
-            'createdAt' => $this->getCreatedAt(),
+            'created_at' => $this->getCreatedAt(),
+            'updated_at' => $this->getUpdatedAt(),
         ];
     }
 }
