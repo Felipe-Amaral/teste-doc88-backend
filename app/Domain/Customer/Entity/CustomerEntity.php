@@ -116,13 +116,28 @@ class CustomerEntity implements Arrayable
     private function populate(array $data): void
     {
         $this->setName($data['name'] ?? null);
-        $this->setName($data['email'] ?? null);
-        $this->setName($data['phone'] ?? null);
-        $this->setName($data['bornDate'] ?? null);
-        $this->setName($data['adress'] ?? null);
-        $this->setName($data['adressComplement'] ?? null);
-        $this->setName($data['district'] ?? null);
-        $this->setName($data['cep'] ?? null);
-        $this->setName($data['createdAt'] ?? null);
+        $this->setEmail($data['email'] ?? null);
+        $this->setPhone($data['phone'] ?? null);
+        $this->setBornDate($data['bornDate'] ?? null);
+        $this->setAdress($data['adress'] ?? null);
+        $this->setAdressComplement($data['adressComplement'] ?? null);
+        $this->setDistrict($data['district'] ?? null);
+        $this->setCep($data['cep'] ?? null);
+        $this->setCreatedAt($data['createdAt'] ?? null);
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->getName(),
+            'email' => $this->getEmail(),
+            'phone' => $this->getPhone(),
+            'bornDate' => $this->getBornDate(),
+            'adress' => $this->getAdress(),
+            'adressComplement' => $this->getAdressComplement(),
+            'district' => $this->getDistrict(),
+            'cep' => $this->getCep(),
+            'createdAt' => $this->getCreatedAt(),
+        ];
     }
 }
