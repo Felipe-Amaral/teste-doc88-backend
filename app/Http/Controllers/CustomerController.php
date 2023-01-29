@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Customer\Service\CustomerServiceInterface;
-use App\Http\Requests\Customer\CustomerStoreRequest;
-use App\Http\Requests\Customer\CustomerUpdateRequest;
+use App\Http\Request\Customer\CustomerStoreRequest;
 use Fig\Http\Message\StatusCodeInterface as Code;
 use Illuminate\Http\JsonResponse;
 
@@ -38,6 +37,16 @@ class CustomerController extends Controller
         }
     }
 
+    public function show(int $id): JsonResponse
+    {
+        return response()->json(
+            [
+                'data' => $this->service->findById($id)->toArray(),
+            ],
+            Code::STATUS_OK
+        );
+    }
+
     public function store(CustomerStoreRequest $request): JsonResponse
     {
         try {
@@ -52,38 +61,19 @@ class CustomerController extends Controller
                 [
                     'error' => true,
                     'message' => 'Internal error while trying to create new customer.',
+                    'local' => $e->getMessage(),
                 ],
                 Code::STATUS_INTERNAL_SERVER_ERROR
             );
         }
     }
 
-    public function show(int $id): JsonResponse
+    public function update(): JsonResponse
     {
         try {
             return response()->json(
                 [
-                    'data' => $this->service->findById($id),
-                ],
-                Code::STATUS_OK
-            );
-        } catch (\Exception $e) {
-            return response()->json(
-                [
-                    'error' => true,
-                    'message' => 'Internal error while trying find customer by Id.',
-                ],
-                Code::STATUS_INTERNAL_SERVER_ERROR
-            );
-        }
-    }
-
-    public function update(CustomerUpdateRequest $request): JsonResponse
-    {
-        try {
-            return response()->json(
-                [
-                    'data' => $this->service->update($request),
+                    'data' => $this->service->update(),
                 ],
                 Code::STATUS_OK
             );

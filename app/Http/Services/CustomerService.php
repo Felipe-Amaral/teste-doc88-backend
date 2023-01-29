@@ -7,8 +7,7 @@ namespace App\Http\Services;
 use App\Domain\Customer\Entity\CustomerEntity;
 use App\Domain\Customer\Resource\CustomerCollection;
 use App\Domain\Customer\Service\CustomerServiceInterface;
-use App\Http\Requests\Customer\CustomerStoreRequest;
-use App\Http\Requests\Customer\CustomerUpdateRequest;
+use App\Http\Request\Customer\CustomerStoreRequest;
 use App\Models\Customer;
 
 class CustomerService implements CustomerServiceInterface
@@ -24,15 +23,19 @@ class CustomerService implements CustomerServiceInterface
     {
         $result = Customer::find($id);
 
-        return new CustomerEntity($result);
+        return new CustomerEntity($result->toArray());
     }
 
     public function store(CustomerStoreRequest $request): bool
     {
-        return true;
+        if (Customer::create($request->toArray())) {
+            return true;
+        }
+
+        return false;
     }
 
-    public function update(CustomerUpdateRequest $request): bool
+    public function update(): bool
     {
         return true;
     }
