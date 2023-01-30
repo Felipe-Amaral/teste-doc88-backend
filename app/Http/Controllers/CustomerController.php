@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Domain\Customer\Service\CustomerServiceInterface;
 use App\Http\Request\Customer\CustomerStoreRequest;
+use App\Http\Request\Customer\CustomerUpdateRequest;
 use Fig\Http\Message\StatusCodeInterface as Code;
 use Illuminate\Http\JsonResponse;
 
@@ -61,19 +62,18 @@ class CustomerController extends Controller
                 [
                     'error' => true,
                     'message' => 'Internal error while trying to create new customer.',
-                    'local' => $e->getMessage(),
                 ],
                 Code::STATUS_INTERNAL_SERVER_ERROR
             );
         }
     }
 
-    public function update(): JsonResponse
+    public function update(CustomerUpdateRequest $request): JsonResponse
     {
         try {
             return response()->json(
                 [
-                    'data' => $this->service->update(),
+                    'data' => $this->service->update($request),
                 ],
                 Code::STATUS_OK
             );

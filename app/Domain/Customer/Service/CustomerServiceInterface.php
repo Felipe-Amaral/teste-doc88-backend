@@ -6,8 +6,7 @@ namespace App\Domain\Customer\Service;
 
 use App\Domain\Customer\Entity\CustomerEntity;
 use App\Domain\Customer\Resource\CustomerCollection;
-use App\Http\Requests\Customer\CustomerStoreRequest;
-use App\Http\Requests\Customer\CustomerUpdateRequest;
+use App\Http\Request\Customer\CustomerStoreRequest;
 
 interface CustomerServiceInterface
 {
@@ -17,7 +16,7 @@ interface CustomerServiceInterface
 
     public function store(CustomerStoreRequest $request): bool;
 
-    public function update(CustomerUpdateRequest $request): bool;
+    public function update(): bool;
 
     public function delete(int $id): bool;
 }

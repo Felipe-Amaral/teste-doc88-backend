@@ -37,7 +37,12 @@ class CustomerService implements CustomerServiceInterface
 
     public function update(): bool
     {
-        return true;
+        exit('1');
+        if (Customer::update($request->toArray())) {
+            return true;
+        }
+
+        return false;
     }
 
     public function delete(int $id): bool
