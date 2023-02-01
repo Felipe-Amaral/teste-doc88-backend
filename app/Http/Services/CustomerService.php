@@ -47,6 +47,10 @@ class CustomerService implements CustomerServiceInterface
 
     public function delete(int $id): bool
     {
-        return true;
+        if (Customer::where('id', $id)->delete()) {
+            return true;
+        }
+
+        return false;
     }
 }
