@@ -17,5 +17,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('customer', CustomerController::class, ['except' => ['create', 'edit']]);
-// Route::resource('product', ProductController::class, ['except' => ['create', 'edit']]);
+Route::resource('product', ProductController::class, ['except' => ['create', 'edit']]);
 // Route::resource('order', OrderController::class, ['except' => ['create', 'edit']]);

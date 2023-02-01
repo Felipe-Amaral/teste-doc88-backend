@@ -16,6 +16,7 @@ class ProductCollection extends Collection
 
     public function toArray(): array
     {
-        // code...
+        return [
+        ];
     }
 }

@@ -44,13 +44,22 @@ class ProductEntity implements Arrayable
 
     public function setPhoto(string $data): void
     {
-        $this->phone = $photo;
+        $this->photo = $data;
     }
 
     private function populate(array $data): void
     {
         $this->setName($data['name'] ?? null);
-        $this->setName($data['price'] ?? null);
-        $this->setName($data['photo'] ?? null);
+        $this->setPrice($data['price'] ?? null);
+        $this->setPhoto($data['photo'] ?? null);
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->getName(),
+            'price' => $this->getPrice(),
+            'photo' => $this->getPhoto(),
+        ];
     }
 }
