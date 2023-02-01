@@ -68,12 +68,12 @@ class CustomerController extends Controller
         }
     }
 
-    public function update(CustomerUpdateRequest $request): JsonResponse
+    public function update(CustomerUpdateRequest $request, int $id): JsonResponse
     {
         try {
             return response()->json(
                 [
-                    'data' => $this->service->update($request),
+                    'data' => $this->service->update($request, $id),
                 ],
                 Code::STATUS_OK
             );

@@ -8,6 +8,7 @@ use App\Domain\Customer\Entity\CustomerEntity;
 use App\Domain\Customer\Resource\CustomerCollection;
 use App\Domain\Customer\Service\CustomerServiceInterface;
 use App\Http\Request\Customer\CustomerStoreRequest;
+use App\Http\Request\Customer\CustomerUpdateRequest;
 use App\Models\Customer;
 
 class CustomerService implements CustomerServiceInterface
@@ -35,10 +36,9 @@ class CustomerService implements CustomerServiceInterface
         return false;
     }
 
-    public function update(): bool
+    public function update(CustomerUpdateRequest $request, int $id): bool
     {
-        exit('1');
-        if (Customer::update($request->toArray())) {
+        if (Customer::where('id', $id)->update($request->toArray())) {
             return true;
         }
 
