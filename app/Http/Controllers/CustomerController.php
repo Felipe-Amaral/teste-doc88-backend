@@ -18,42 +18,12 @@ class CustomerController extends Controller
         $this->service = $service;
     }
 
-    public function index(): JsonResponse
+    public function create(CustomerStoreRequest $request): JsonResponse
     {
         try {
             return response()->json(
                 [
-                    'data' => $this->service->getList(),
-                ],
-                Code::STATUS_OK
-            );
-        } catch (\Exception $e) {
-            return response()->json(
-                [
-                    'error' => true,
-                    'message' => 'Internal error while trying to get list of customers.',
-                ],
-                Code::STATUS_INTERNAL_SERVER_ERROR
-            );
-        }
-    }
-
-    public function show(int $id): JsonResponse
-    {
-        return response()->json(
-            [
-                'data' => $this->service->findById($id)->toArray(),
-            ],
-            Code::STATUS_OK
-        );
-    }
-
-    public function store(CustomerStoreRequest $request): JsonResponse
-    {
-        try {
-            return response()->json(
-                [
-                    'data' => $this->service->store($request),
+                    'data' => $this->service->create($request),
                 ],
                 Code::STATUS_CREATED
             );
@@ -62,6 +32,26 @@ class CustomerController extends Controller
                 [
                     'error' => true,
                     'message' => 'Internal error while trying to create new customer.',
+                ],
+                Code::STATUS_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    public function read(int $id): JsonResponse
+    {
+        try {
+            return response()->json(
+                [
+                    'data' => $this->service->read($id)->toArray(),
+                ],
+                Code::STATUS_OK
+            );
+        } catch (\Exception $e) {
+            return response()->json(
+                [
+                    'error' => true,
+                    'message' => 'Internal error while trying to read a customer.',
                 ],
                 Code::STATUS_INTERNAL_SERVER_ERROR
             );
@@ -88,7 +78,7 @@ class CustomerController extends Controller
         }
     }
 
-    public function destroy(int $id): JsonResponse
+    public function delete(int $id): JsonResponse
     {
         try {
             return response()->json(
@@ -102,6 +92,26 @@ class CustomerController extends Controller
                 [
                     'error' => true,
                     'message' => 'Internal error while trying to delete customer',
+                ],
+                Code::STATUS_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    public function list(): JsonResponse
+    {
+        try {
+            return response()->json(
+                [
+                    'data' => $this->service->list(),
+                ],
+                Code::STATUS_OK
+            );
+        } catch (\Exception $e) {
+            return response()->json(
+                [
+                    'error' => true,
+                    'message' => 'Internal error while trying to get list of customers.',
                 ],
                 Code::STATUS_INTERNAL_SERVER_ERROR
             );

@@ -13,32 +13,25 @@ use App\Models\Customer;
 
 class CustomerService implements CustomerServiceInterface
 {
-    public function getList(): CustomerCollection
+    public function create(CustomerStoreRequest $request): bool
     {
-        $result = Customer::All();
-
-        return new CustomerCollection($result);
-    }
-
-    public function findById(int $id): CustomerEntity
-    {
-        $result = Customer::find($id);
-
-        return new CustomerEntity($result->toArray());
-    }
-
-    public function store(CustomerStoreRequest $request): bool
-    {
-        if (Customer::create($request->toArray())) {
+        if (Customer::create($request->all())) {
             return true;
         }
 
         return false;
     }
 
+    public function read(int $id): CustomerEntity
+    {
+        $result = Customer::find($id);
+
+        return new CustomerEntity($result->toArray());
+    }
+
     public function update(CustomerUpdateRequest $request, int $id): bool
     {
-        if (Customer::where('id', $id)->update($request->toArray())) {
+        if (Customer::where('id', $id)->update($request->all())) {
             return true;
         }
 
@@ -52,5 +45,12 @@ class CustomerService implements CustomerServiceInterface
         }
 
         return false;
+    }
+
+    public function list(): CustomerCollection
+    {
+        $result = Customer::All();
+
+        return new CustomerCollection($result);
     }
 }

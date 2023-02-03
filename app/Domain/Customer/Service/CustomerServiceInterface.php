@@ -11,13 +11,13 @@ use App\Http\Request\Customer\CustomerUpdateRequest;
 
 interface CustomerServiceInterface
 {
-    public function getList(): CustomerCollection;
+    public function create(CustomerStoreRequest $request): bool;
 
-    public function findById(int $id): CustomerEntity;
-
-    public function store(CustomerStoreRequest $request): bool;
+    public function read(int $id): CustomerEntity;
 
     public function update(CustomerUpdateRequest $request, int $id): bool;
 
     public function delete(int $id): bool;
+
+    public function list(): CustomerCollection;
 }
