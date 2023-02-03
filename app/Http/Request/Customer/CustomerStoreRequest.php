@@ -15,17 +15,15 @@ class CustomerStoreRequest extends FormRequest
 
     public function rules(): array
     {
-        $rules = [
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'phone' => 'required|string',
-            'bornDate' => 'required|string',
-            'adress' => 'required|string',
-            'adressComplement' => 'required|string',
-            'district' => 'required|string',
-            'cep' => 'required|string',
+        return [
+            'name' => 'required|string|min:3|max:255',
+            'email' => 'required|email|unique:customers,email|max:255',
+            'phone' => 'required|string|max:255',
+            'bornDate' => 'required|date|before:today',
+            'adress' => 'required|string|max:255',
+            'adressComplement' => 'required|string|max:255',
+            'district' => 'required|string|max:255',
+            'cep' => 'required|string|digits:8',
         ];
-
-        return $rules;
     }
 }
